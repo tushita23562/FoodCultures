@@ -1,0 +1,362 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resources | FoodCultures</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .nav-pills-custom .nav-link {
+      border-radius: 0;
+      margin-right: 5px;
+    }
+    .resourceDownload {
+      border: 1px solid #ccc;
+      padding: 20px;
+      margin: 10px 0;
+      border-radius: 5px;
+      background-color: #fdfdfd;
+    }
+    .resourceDownload h5 {
+      font-weight: bold;
+    }
+    .resourceDownload a {
+      display: inline-block;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="container mt-4">
+  <h2>Resources</h2>
+  <p>To help us better understand western Avadh's food and ecological history, we referred to a number of historical documents, reports and research material. Some of the most useful ones are shared below:</p>
+
+  <ul class="nav nav-pills nav-pills-custom mb-3" id="resourceTabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="primary-tab" data-toggle="pill" href="#primary" role="tab">Primary Material</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="reports-tab" data-toggle="pill" href="#reports" role="tab">Reports</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="papers-tab" data-toggle="pill" href="#papers" role="tab">Papers</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="gazetteers-tab" data-toggle="pill" href="#gazetteers" role="tab">Gazetteers</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="syllabi-tab" data-toggle="pill" href="#syllabi" role="tab">Syllabi</a>
+    </li>
+  </ul>
+
+  <div class="tab-content" id="resourceTabsContent">
+    <div class="tab-pane fade show active" id="primary" role="tabpanel">
+      <div class="resourceDownload">
+        <h5>Contested narratives of dietary transitions in India</h5>
+        <h6>2019</h6>
+        <p>This is a video recording of a presentation made at the ANH (Agriculture Nutrition & Health) Academy's Conference</p>
+        <a href="https://www.youtube.com/watch?v=HCrhwBo0DiI" target="_blank">View</a>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="reports" role="tabpanel">
+      <div class="resourceDownload">
+        <h5>Analysis of wetland habitat changes</h5>
+        <h6>2007</h6>
+        <p>This study uses satellite maps to trace the decline of wetlands in five districts of Uttar Pradesh...</p>
+        <a href="https://drive.google.com/file/d/1noWVDUTcWlVuEzESx50nXlCe4nM9YQb-/view" target="_blank">View</a>
+      </div>
+      <div class="resourceDownload">
+        <h5>A story of culinary apartheid</h5>
+        <h6>2016</h6>
+        <p>An enforced culture of want among India's most marginalized gave birth to unique dishes...</p>
+        <a href="https://www.livemint.com/Leisure/wJzDhGEE4csaX2BjhjHMsL/A-story-of-culinary-apartheid.html" target="_blank">View</a>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="papers" role="tabpanel">
+      <div class="resourceDownload">
+        <h5>Late Quaternary vegetation history</h5>
+        <h6>2015</h6>
+        <p>This paper describes the results of pollen analysis of sediments in a lake bed in Lucknow district...</p>
+        <a href="https://www.sciencedirect.com/science/article/abs/pii/S1040618215002104?via%3Dihub" target="_blank">View</a>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="gazetteers" role="tabpanel">
+      <div class="resourceDownload">
+        <h5>Journey through the kingdom of Oude</h5>
+        <h6>1849-50</h6>
+        <p>Sleeman was the Oude resident at the time of writing this diary. He undertook this trip to ascertain conditions...</p>
+        <a href="https://drive.google.com/file/d/1h2xstwesvtsI5M2YqA1QPYEYEtld9xla/view" target="_blank">View</a>
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="syllabi" role="tabpanel">
+      <div class="resourceDownload">
+        <h5>Coming soon...</h5>
+        <p>This section will include syllabi used in local schools and colleges.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> -->
+
+{% extends 'base.html' %}
+{% block title %}Resources | Food Cultures{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4">
+  <h2 class="text-2xl font-bold mb-4">Resources</h2>
+  <p class="mb-6">
+    To help us better understand western Avadh's food and ecological history, we referred to a number of historical documents, reports and research material. Some of the most useful ones are shared below:
+  </p>
+
+  <!-- Nav tabs -->
+  <!-- <ul class="nav nav-pills mb-4" id="resourceTabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active font-bold text-lg" id="primary-tab" data-toggle="pill" href="#primary" role="tab">Primary Material</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active font-bold text-lg" id="reports-tab" data-toggle="pill" href="#reports" role="tab">Reports</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active font-bold text-lg" id="papers-tab" data-toggle="pill" href="#papers" role="tab">Research Papers</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active font-bold text-lg" id="gazetteers-tab" data-toggle="pill" href="#gazetteers" role="tab">Gazetteers</a>
+    </li>
+  </ul> -->
+
+  <!-- Tab panes -->
+  <div class="tab-content" id="resourceTabsContent">
+
+    <!-- Primary Material -->
+    <div class="tab-pane fade show active" id="primary" role="tabpanel">
+      <div class="mb-6">
+        <h4 class="font-bold underline underline-offset-4 decoration-2">Primary materials:</h4>
+        <p class="mb-4">These papers, presentations etc. are outputs of this research and touch on various aspects of our findings.</p>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Constituting the norm: Interrogating the Anthropocene through food geographies in the more-than-human worlds of Western Avadh, India</h5>
+          <p class="italic">2022</p>
+          <p>This paper traces the history of western Avadh using the lens of food geographies and the Anthropocene. We show how the interplay of humans and non-humans and their natural environment from the Iron Age onwards challenge the standard narrative of human development</p>
+          <a href="https://drive.google.com/file/d/1qnqf681sva4HFhQ_Q-Xv36fFxwaop-yP/view?usp=sharing" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Contested narratives of dietary transitions in India: Examining the incommensurability of macro and micro datasets</h5>
+          <p class="italic">2019</p>
+          <p>This is a video recording of a presentation made at the ANH (Agriculture Nutrition & Health) Academy's Conference</p>
+          <a href="https://www.youtube.com/watch?v=HCrhwBo0DiI" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reports -->
+    <div class="tab-pane fade" id="reports" role="tabpanel">
+      <div class="mb-6">
+        <h4 class="font-bold underline underline-offset-4 decoration-2">Reports & articles:</h4>
+        <p class="mb-4">These reports and articles cover topics of interest such as uncultivated foods, changes in land use etc.</p>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">A story of culinary apartheid</h5>
+          <p class="italic">2016</p>
+          <p>An enforced culture of want among India's most marginalized gave birth to unique dishes, culinary diversity and resilience.</p>
+          <a href="https://www.livemint.com/Leisure/wJzDhGEE4csaX2BjhjHMsL/A-story-of-culinary-apartheid.html" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Forests as Food Producing Habitats, - An exploratory study of Uncultivated Foods and Food & Nutrition Security of Adivasis in Odisha</h5>
+          <p class="italic">2014</p>
+          <p>This publication from Living Farms documents uncultivated foods consumed by Adivasi (indigenous) communities in two districts of Odisha – Rayagada and Sundargarh. A third of the population in six villages was selected and these households' intake was tracked over six months. The researchers recorded 121 different kinds of mushrooms, tubers, leafy vegetables, wild fruits & vegetables and wild animals collected, with consumption ranging from 12% to 24.4% of total cooked foods. Interestingly, the study also reviews historical records that show there was never famine in this part of the country due to the Adivasi dependence on uncultivated foods.</p>
+          <a href="https://drive.google.com/file/d/1lN0OXiT442_xz3BLsfsH9K1Te4u-f2uZ/view?usp=sharing" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Analysis of wetland habitat changes and its impacts on avifauna in select district of the Indo-Gangetic plains of Uttar Pradesh, India, between 1972 and 2004</h5>
+          <p class="italic">2007</p>
+          <p>This study uses satellite maps to trace the decline of wetlands in five districts of Uttar Pradesh, including Sitapur and Hardoi. It describes various factors that have led to the decline, and its impact on wildlife</p>
+          <a href="https://drive.google.com/file/d/1noWVDUTcWlVuEzESx50nXlCe4nM9YQb-/view" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Research (Papers) -->
+    <div class="tab-pane fade" id="papers" role="tabpanel">
+      <div class="mb-6">
+        <h4 class="font-bold underline underline-offset-4 decoration-2">Research Papers:</h4>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Food security from free collection of foods: Evidence from India</h5>
+          <p class="italic">2021</p>
+          <p>In this paper, Sudha Narayan describes the continuing importance of the free collection of foods to diversifying diets and improving nutrition security by analysing food consumption data in the National Sample Surveys (NSS) of 2009-10 and 2011-12. She finds that, though there has been a rapid decline in the population that consumes free foods (5.8% compared to 12% in 2004-05), in districts where free foods are important, 15% of households collect food.</p>
+          <a href="https://d1wqtxts1xzle7.cloudfront.net/70426220/WP-2019-037-libre.pdf?1632837148=&response-content-disposition=inline%3B+filename%3DFood_Security_From_Free_Collection_of_Fo.pdf&Expires=1723214445&Signature=RDUuUQ6DYifQID58UxhNz4yDh8irOt0VbPAv9tJ2mpy4Z829xj4Jc59rXPZYse3MTR~DCQy6dctuAw-GHiFdtp5d5U~6PG-VsrJCFURUyLyAl3rFbdAc3WaAjDgMl69sI-XjpKzSl3tFrLvo-q-QO9Guy1DrfzWDjqzp4LidlbuxWhKOw930nAueli-MkOvpj3bbq4P0J7t52~V-TGTzC7HCgPRR1MuvHX3dF~3T0yhyQ7~1z15mRjxU1EvssfcH1Vesg692y9lEzybhAuvMlviqbmVeDBvq0hamPd5kQyB7SJcZWZkKq8gZecBobSY9XkaQtb6izlwadDWic9Pi6g__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Millets, milk and maggi: contested processes of the nutrition transition in rural India</h5>
+          <p class="italic">2017</p>
+          <p>This ethnographic study traces dietary changes in the Kumaon Hills, Uttarakhand. The author, Carly Nichols, spent a few months in four villages of Nainital district, lived with three families and conducted 72 semi-structured interviews on agricultural production and household consumption. She found a transition away from madua or finger millet, which is considered dark and undesirable, towards packaged foods such as Maggi noodles. Milk consumption has fallen as most of the milk produced is sold through dairies. The author recommends that quantitative methods that can show what has changed in diets should be combined with qualitative that show how these changes occurred.</p>
+          <a href="https://link.springer.com/article/10.1007/s10460-017-9781-0" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Late Quaternary vegetation history, climatic variability and human activity in the Central Ganga Plain, deduced by pollen proxy records from Karela Jheel, India</h5>
+          <p class="italic">2015</p>
+          <p>This paper describes the results of pollen analysis of sediments in a lake bed in Lucknow district, which indicate agricultural practices from nearly 12,000 years ago</p>
+          <a href="https://www.sciencedirect.com/science/article/abs/pii/S1040618215002104?via%3Dihub" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Wellbeing by Eating Well</h5>
+          <p class="italic">2015</p>
+          <p>This commentary describes agricultural and food transitions in a village in Chittoor district, Andhra Pradesh over the last 50-100 years. The author, Uma Shankari, shares her personal recollections of three periods – the bullock, pre-irrigation period; the borewell period and the NREGA period. </p>
+          <a href="https://drive.google.com/file/d/1sEeeJ6bFGWTsBpN9CHUVqoT_a2M-ZhU_/view?usp=sharing" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">‘‘Tinni’’ Rice (Oryza rufipogon Griff.) Production: An Integrated Sociocultural Agroecosystem in Eastern Uttar Pradesh of India</h5>
+          <p class="italic">2012</p>
+          <p>This paper describes a wild rice ecosystem in eastern Uttar Pradesh, where the local Bhar community conserves the wetlands where tinni rice grows, and harvests it when mature. While this is not the story of our study region, it is indicative of how settled communities played a role in managing 'wild' spaces  </p>
+          <a href="https://www.researchgate.net/profile/Chandra-Pandey-5/publication/51682070_Tinni_Rice_Oryza_rufipogon_Griff_Production_An_Integrated_Sociocultural_Agroecosystem_in_Eastern_Uttar_Pradesh_of_India/links/597037cf0f7e9b441736768e/Tinni-Rice-Oryza-rufipogon-Griff-Production-An-Integrated-Sociocultural-Agroecosystem-in-Eastern-Uttar-Pradesh-of-India.pdf" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Finding Plant Domestication in the Indian Subcontinent</h5>
+          <p class="italic">2011</p>
+          <p>This paper provides a comprehensive overview of plant domestication in different regions of the Indian subcontinent. It analyses the findings from archeological sites in the Gangetic plain that show early consumption of rice from 8000 BCE onwards, and discusses whether this was cultivated or collected.</p>
+          <a href="https://www.journals.uchicago.edu/doi/full/10.1086/658900" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Palaeoethnobotanical Finds from Ancient Naimisharanya, District Sitapur; U.P. during Kushana Period (A.D. 100-300)</h5>
+          <p class="italic">2011</p>
+          <p>This paper describes the seeds and fruit remains found in a mound at Naimisharanya in Sitapur district. They include cereals, pulses, vegetables, cotton and fruits - many of these crops are still cultivated today.</p>
+          <a href="https://drive.google.com/file/d/18qZcNV52kedbQZidb51ayTuENFXzt4S0/view?usp=sharing" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">The roles and values of wild foods in agricultural systems</h5>
+          <p class="italic">2010</p>
+          <p>This review paper examines the importance of wild foods in communities across the world. It starts off by debunking the premise that human civilisation moved from hunter-gatherer lifestyle to a complete agricultural one, using the term cultivator-hunters or farmer-foragers to describe communities that shape their non-agricultural environment in various ways. It talks about the 'hidden harvest' of wild foods, including those that are found in cultivated land such as paddy fields. It describes the diversity and nutritive value of wild foods, as well as the factors leading to their decline such as climate change, land use change, unsustainable harvesting etc. Another important factor is that the consumption of wild foods is considered shameful in wider society. This is in spite of the fact that globally, over 1 billion people consume wild foods</p>
+          <a href="https://drive.google.com/file/d/1eaFVFmW-fqMh7WP4GeQ_qLb7wwF8V4_w/view?usp=sharing" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Common Property Resources and the poor - findings from West Bengal</h5>
+          <p class="italic">2000</p>
+          <p>This paper describes the access to CPRs for the poor, with findings from seven villages throughout Bengal. The authors found that, along with fuel and fodder, food is also collected - fish and greens from paddy fields, fish and prawn from privately owned tanks and fruits and meat from the forests. Agricultural intensification, population growth and environmental degradation have led to decline in CPRs. Further, new forms of community-based resource management, such as a fishermen's cooperative society has resulted in the conversion of open access resources into 'private' property. Thus, processes of modernisation which take over from customary access have not been kind to poor communities.</p>
+          <a href="https://drive.google.com/file/d/14H9zIueVi7O5TV2LwwcRLBP_DdjlvmTA/view?usp=sharing" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Common property resources and rural poor in dry regions of India</h5>
+          <p class="italic">1986</p>
+          <p>NS Jodha spent decades researching the importance of Common Property Resources (CPR) for the rural poor. This seminal work documents findings from 80 villages in 21 districts and seven states (now eight) of India. While he considers all these dry regions, it must be noted that some have rainfall comparable to western Avadh, such as Vidisha, MP. The paper describes how CPRs reduced inequity by providing resources to the poor, and discusses various factors that have led to their decline </p>
+          <a href="https://drive.google.com/file/d/1qLt3njjh4_emvmX7pTft-DLfLy9P0ljL/view?usp=sharing" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">The Peasant in Indian History</h5>
+          <p class="italic">1983</p>
+          <p>This paper describes peasant communities across the Indian subcontinent, with sections on the Gangetic plain. These sections describe the transition to settled agriculture, the agrarian structures that formed and the evolution of tribes into rigid castes. While this is dated and based entirely on historical written texts, it provides insights into transitions across 3000 years in this region</p>
+          <a href="https://doi.org/10.2307/3516915" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Anti-Feudal and Anti-Colonial Struggles of the Oudh Peasantry in Early 1920s</h5>
+          <p class="italic">1980</p>
+          <p>This paper describes the peasant struggle in Oudh (Avadh) in the 1920s and the opposition it received from the Indian National Congress. It provides insights into why taluqdars and zamindars, the landlords of Avadh, were strong enough to resist the post-Independence land reforms</p>
+          <a href="https://www.jstor.org/stable/pdf/3516732.pdf" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Gazetteers -->
+    <div class="tab-pane fade" id="gazetteers" role="tabpanel">
+      <div class="mb-6">
+        <h4 class="font-bold underline underline-offset-4 decoration-2">Gazetteers:</h4>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Uttar Pradesh District Gazetteers - Sitapur Supplementary</h5>
+          <p class="italic">1989</p>
+          <p>This is a brief report providing district level statistics, reports of natural disasters etc.</p>
+          <a href="https://drive.google.com/file/d/1Zs_kx38mwSx4ptCMVQ_QzjUe6X_aqfW8/view?usp=sharing" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Uttar Pradesh District Gazetteers - Sitapur</h5>
+          <p class="italic">1964</p>
+          <p>This is the first gazetteer for Sitapur district produced in the post-Independence era, and provides updated information about the district </p>
+          <a href="https://drive.google.com/file/d/1gSMEsv87JgHipG0ejRECujR0VJFS9z5u/view?usp=sharing" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">The design and construction of the Sarda canal</h5>
+          <p class="italic">1932</p>
+          <p>This a paper presented by Sir Bernard Darley, the engineer in charge of the Sarda canal construction. Along with technical aspects, he describes the history of how the canal came to be, along with the opposition from big landlords in the area. He also describes early problems with waterlogging, which has continued to be a problem in canal command areas</p>
+          <a href="https://drive.google.com/file/d/1u_irhRWiAT2BVV1pbTBXiQ6AUF5OAnOk/view?usp=sharing" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Final report on the settlement of land revenue in the district Hardoi (Oudh)</h5>
+          <p class="italic">Published in 1932</p>
+          <p>This is the report of the third and final settlement of Hardoi district. It describes how previous settlements had to be revised downwards as large tracts of land are vulnerable to climatic variations. It also mentions the newly constructed Sarda canal and the expected benefits from it</p>
+          <a href="https://drive.google.com/file/d/1ShWXXv4ZcVXNR4nuB0o1YFrEZbKoC8a4/view?usp=sharing" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Kheri, a Gazetteer</h5>
+          <p class="italic">Published in 1905</p>
+          <p>Starting in the late 19th century, the colonial government prepared gazetteers for districts in British India, which served as comprehensive geographical, economic, social and cultural catalogues. This is the gazetteer for Kheri district, which adjoins Sitapur district</p>
+          <a href="https://drive.google.com/file/d/1S6uZobz4obBO1yx_TtvIpeQwRiIVCQAT/view?usp=sharing" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Sitapur, a Gazetteer</h5>
+          <p class="italic">Published in 1905</p>
+          <p>Starting in the late 19th century, the colonial government prepared gazetteers for districts in British India, which served as comprehensive geographical, economic, social and cultural catalogues. This is the gazetteer for Sitapur district, which draws from earlier settlement reports and other documents</p>
+          <a href="https://drive.google.com/file/d/14JB9HNmEqeHettPMd75KbVG4pmKEzkJg/view?usp=sharing" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Report on the Regular Settlement of the Hardoi district</h5>
+          <p class="italic">Published in 1880</p>
+          <p>This document, the first settlement report of Hardoi district (which adjoins Sitapur district), provides descriptions of the natural landscape, wildlife and communities. The crops of the region are listed out, and assessments made for the jama to be collected.</p>
+          <a href="https://drive.google.com/file/d/1FzI7Vo2kUenscsxoge-nNhLy3z6GTbNJ/view?usp=sharing" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Regular Settlement and Revised assessment of the district of Sitapur</h5>
+          <p class="italic">1860s, published in 1873</p>
+          <p>The first colonial surveys of Sitapur district were conducted in the 1860s, after the British won the 1857 war and gained direct control of Oudh. Assessments followed soon after, and the settlement report, published in 1873, fixed the jama or tax to be collected for agricultural land for the next 30 years. The document has detailed descriptions of all the parganas and towns of Sitapur district and the histories of prominent families. It also describes the physical landscape, flora and fauna and the crops of the region. </p>
+          <a href="https://drive.google.com/file/d/1-gcg1qL3HB795-XELs5Mue7CJGVnjarv/view?usp=sharing" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+
+        <div class="border rounded p-4 mb-4">
+          <h5 class="font-semibold">Journey through the kingdom of Oude, 1849-50 – Major-General W. H. Sleeman</h5>
+          <p class="italic">1849-50, published in 1858</p>
+          <p>Sleeman was the Oude resident at the time of writing this diary. He undertook this trip to ascertain conditions of the Oude territory under the Nawab (who had by then proclaimed himself king). Earlier, he had been instrumental in 'identifying' Thuggees and was head of the Thuggee Department in 1835.</p>
+          <a href="https://drive.google.com/file/d/1h2xstwesvtsI5M2YqA1QPYEYEtld9xla/view" target="_blank" class="text-blue-600 underline">View</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS for tabs (already loaded via base.html JS includes) -->
+<script>
+  $(function () {
+    $('#resourceTabs a').on('click', function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    })
+  });
+</script>
+{% endblock %}

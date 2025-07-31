@@ -1,0 +1,345 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ food_crop_name_hi if language == 'hi' else food_crop_name }} | Food Cultures
+{% endblock %}
+
+{% block content %}
+
+<style>
+  .glossary-term {
+    font-weight: bold;
+    position: relative;
+    cursor: help;
+  }
+  .glossary-term::after {
+    content: attr(data-definition);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fef3c7;
+    color: #333;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: pre-wrap;
+    font-size: 0.8rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+    width: max-content;
+    max-width: 200px;
+    z-index: 50;
+  }
+  .glossary-term:hover::after {
+    opacity: 1;
+  }
+
+  #imgModal {
+    display: none;
+    position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.9); text-align: center;
+  }
+  #imgModal img {
+    margin: auto; display: block; max-width: 90%; max-height: 90%; margin-top: 5%;
+  }
+  #imgModal span {
+    position: absolute; top: 20px; right: 45px; color: #fff; font-size: 40px; cursor: pointer;
+  }
+
+  /* ✅ Add link styles for card links */
+  .statement-card a {
+    color: #1a0dab;    /* Google blue */
+    text-decoration: underline;
+  }
+  .statement-card a:hover {
+    color: #551a8b;    /* Darker on hover */
+    text-decoration: underline;
+    cursor: pointer;
+  }
+</style>
+
+<section class="bg-yellow-100 px-6 py-6 rounded mb-8 flex flex-col md:flex-row justify-between items-center">
+  <h1 class="text-3xl font-semibold">
+    {% if language == 'hi' %}{{ food_crop_name_hi }}{% else %}{{ food_crop_name }}{% endif %}
+  </h1>
+
+  <div class="relative inline-block">
+    <button onclick="toggleDropdown()" class="border px-4 py-2 rounded bg-yellow-200 hover:bg-yellow-300">
+      {% if language == 'hi' %} अन्य श्रेणियाँ {% else %} Other Categories {% endif %}
+    </button>
+    <div id="dropdown" class="hidden absolute z-10 mt-2 w-56 bg-white border rounded shadow">
+      {% for cat in food_categories %}
+  {% if cat.food_category_name != 'Unmapped' %}
+    <a href="/category/{{ cat.food_category_id }}?lang={{ language }}" class="block px-4 py-2 hover:bg-gray-100">
+      {% if language == 'hi' %}
+        {{ cat.food_category_name_hi or fallback.get(cat.food_category_name, cat.food_category_name) }}
+      {% else %}
+        {{ cat.food_category_name }}
+      {% endif %}
+    </a>
+  {% endif %}
+{% endfor %}
+
+    </div>
+  </div>
+</section>
+
+{% if language == 'hi' and not hindi_supported %}
+  <div class="text-center text-3xl font-bold text-gray-800 my-16">जल्द आ रहा है...</div>
+{% else %}
+
+<section class="border border-gray-200 p-6 rounded mb-8 max-w-4xl mx-auto">
+  <h2 class="text-xl font-bold mb-4">{% if language == 'hi' %} जानकारी कार्ड {% else %} Information Cards {% endif %}</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div>
+      <h3 class="font-semibold mb-2">{% if language == 'hi' %} जाति: {% else %} Caste: {% endif %}</h3>
+      {% for caste in castes %}
+        {% set name = caste.caste_name_hi if language == 'hi' and caste.caste_name_hi else caste.caste_name %}
+        {% if name.lower() != 'unmapped' %}
+        <label class="block">
+          <input type="checkbox" name="caste" value="{{ caste.caste_id }}" onchange="filterData()">
+          {% if language == 'hi' %}{{ caste.caste_name_hi or caste.caste_name }}{% else %}{{ caste.caste_name }}{% endif %}
+        </label>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div>
+      <h3 class="font-semibold mb-2">{% if language == 'hi' %} मौसम: {% else %} Seasons: {% endif %}</h3>
+      {% for season in seasons %}
+        {% set name = season.season_name_hi if language == 'hi' and season.season_name_hi else season.season_name %}
+        {% if name.lower() != 'unmapped' %}
+        <label class="block">
+          <input type="checkbox" name="season" value="{{ season.season_id }}" onchange="filterData()">
+          {% if language == 'hi' %}{{ season.season_name_hi or season.season_name }}{% else %}{{ season.season_name }}{% endif %}
+        </label>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div>
+      <h3 class="font-semibold mb-2">{% if language == 'hi' %} क्षेत्र/मिट्टी: {% else %} Geography: {% endif %}</h3>
+      {% for geo in geographies %}
+        {% set name = geo.geography_name_hi if language == 'hi' and geo.geography_name_hi else geo.geography_name %}
+        {% if name.lower() != 'unmapped' %}
+        <label class="block">
+          <input type="checkbox" name="geography" value="{{ geo.geography_id }}" onchange="filterData()">
+          {% if language == 'hi' %}{{ geo.geography_name_hi or geo.geography_name }}{% else %}{{ geo.geography_name }}{% endif %}
+        </label>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <!-- Add inside your filter section -->
+    <div>
+  <h3 class="font-semibold mb-2">{% if language == 'hi' %} मीडिया प्रकार: {% else %} Media Type: {% endif %}</h3>
+  {% for media in media_types %}
+  {% if media != 'Unmapped' %}
+    {% if language == 'hi' %}
+      {% set media_hi = {
+        'Image': 'चित्र',
+        'Video': 'वीडियो',
+        'Text': 'पाठ'
+      }[media] %}
+    {% else %}
+      {% set media_hi = media %}
+    {% endif %}
+    <label class="block">
+      <input type="checkbox" name="media_type" value="{{ media }}" onchange="filterData()">
+      {{ media_hi }}
+    </label>
+  {% endif %}
+{% endfor %}
+</div>
+
+</section>
+
+<section id="cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+  {% for s in initial_statements %}
+    <div class="statement-card border rounded shadow p-4 hover:shadow-lg transition break-words">
+      <div class="text-sm bg-yellow-100 inline-block px-2 py-1 rounded mb-2">
+        {% if language == 'hi' %}
+          जाति: {{ s.caste_name_hi or s.caste_name or 'सभी' }} |
+          क्षेत्र: {{ s.geography_name_hi or s.geography_name or 'सभी' }} |
+          मौसम: {{ s.season_name_hi or s.season_name or 'सभी' }}
+        {% else %}
+          Caste: {{ s.caste_name or 'All' }} |
+          Geography: {{ s.geography_name or 'All' }} |
+          Season: {{ s.season_name or 'All' }}
+        {% endif %}
+      </div>
+      <div class="statement-text">
+        {% if 'youtube' in s.statement.lower() %}
+          <iframe class="w-full aspect-video mb-2"
+                  src="{{ s.statement }}"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        {% elif 'imagekit' in s.statement.lower() %}
+          <img src="{{ s.statement }}" alt="" class="w-full max-h-60 object-contain mx-auto mb-2 rounded shadow"
+               data-enlargeable style="cursor: zoom-in;">
+        {% elif s.statement.startswith('http') %}
+          <!-- ✅ If statement starts with http, render as link -->
+          <p class="italic text-gray-800">
+            <a href="{{ s.statement }}" target="_blank">
+              {{ s.statement | highlight_glossary(Glossary) | safe }}
+            </a>
+          </p>
+        {% else %}
+          <p class="italic text-gray-800">{{ s.statement | highlight_glossary(Glossary) | safe }}</p>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</section>
+
+<div id="imgModal"><span>&times;</span><img></div>
+
+<section class="max-w-4xl mx-auto mt-12">
+  <h2 class="text-xl font-bold mb-4">{% if language == 'hi' %} घटनाक्रम {% else %} Timeline {% endif %}</h2>
+  {% for t in timeline %}
+    {% set toggle_id = t.id ~ '-' ~ t.label|replace(' ', '_') ~ '-' ~ t.transition|replace(' ', '_') %}
+    <div class="mb-4 border-b pb-2">
+      <button onclick="toggleDescription('{{ toggle_id }}')" class="text-left w-full font-medium text-yellow-800 hover:underline">
+        {{ t.label }} — {{ t.transition }}
+      </button>
+      <div id="desc-{{ toggle_id }}" class="hidden mt-2 text-gray-700 glossary-process">
+        {{ t.description | safe }}
+      </div>
+    </div>
+  {% endfor %}
+</section>
+
+{% endif %}
+
+<script>
+  const lang = "{{ language }}";
+
+  function toggleDropdown() {
+    document.getElementById('dropdown').classList.toggle('hidden');
+  }
+
+  function toggleDescription(id) {
+    const elem = document.getElementById('desc-' + id);
+    if (elem) elem.classList.toggle('hidden');
+  }
+
+  const toggle = document.getElementById('languageToggle');
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      const newLang = lang === 'hi' ? 'en' : 'hi';
+      const url = new URL(window.location.href);
+      url.searchParams.set('lang', newLang);
+      window.location.href = url.href;
+    });
+  }
+
+  document.addEventListener('click', function(e) {
+    if (e.target.matches('img[data-enlargeable]')) {
+      const modal = document.getElementById('imgModal');
+      modal.style.display = 'block';
+      modal.querySelector('img').src = e.target.src;
+    } else if (e.target.closest('#imgModal span')) {
+      document.getElementById('imgModal').style.display = 'none';
+    }
+  });
+
+  function processGlossary(text, glossary) {
+    if (!glossary) return text;
+    glossary.sort((a, b) => b.term.length - a.term.length);
+    glossary.forEach(entry => {
+      const term = entry.term;
+      const def = entry.definition.replace(/"/g, '&quot;');
+      const regex = new RegExp(`\\b(${term})\\b`, 'gi');
+      text = text.replace(regex, `<span class="glossary-term" data-definition="${def}">$1</span>`);
+    });
+    return text;
+  }
+
+  async function applyGlossary() {
+    const res = await fetch('/get_statements', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        food_category_id: {{ food_category_id }},
+        language: lang
+      })
+    });
+    const data = await res.json();
+    const glossary = data.Glossary;
+
+    document.querySelectorAll('.glossary-process').forEach(el => {
+      el.innerHTML = processGlossary(el.innerHTML, glossary);
+    });
+  }
+
+  async function filterData() {
+    const caste = [...document.querySelectorAll('input[name="caste"]:checked')].map(el => el.value);
+    const season = [...document.querySelectorAll('input[name="season"]:checked')].map(el => el.value);
+    const geography = [...document.querySelectorAll('input[name="geography"]:checked')].map(el => el.value);
+    const media_type = [...document.querySelectorAll('input[name="media_type"]:checked')].map(el => el.value);
+
+    const res = await fetch('/get_statements', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        food_category_id: {{ food_category_id }},
+        caste_ids: caste,
+        season_ids: season,
+        geography_ids: geography,
+        media_types: media_type,
+        language: lang
+      })
+    });
+
+    const result = await res.json();
+    const data = result.statements;
+    const glossary = result.Glossary;
+
+    const container = document.getElementById('cards');
+    container.innerHTML = '';
+
+    const seen = new Set();
+
+    data.forEach(row => {
+      const casteLabel = lang === 'hi' ? (row.caste_name_hi || row.caste_name || 'सभी') : (row.caste_name || 'All');
+      const geoLabel = lang === 'hi' ? (row.geography_name_hi || row.geography_name || 'सभी') : (row.geography_name || 'All');
+      const seasonLabel = lang === 'hi' ? (row.season_name_hi || row.season_name || 'सभी') : (row.season_name || 'All');
+      const statement = row.statement.trim();
+
+      const key = `${statement}|||${casteLabel}|||${geoLabel}|||${seasonLabel}`;
+
+      if (seen.has(key)) return;
+      seen.add(key);
+
+      let block = '';
+      const lower = statement.toLowerCase();
+      if (lower.includes('youtube')) {
+        block = `<iframe class="w-full aspect-video mb-2" src="${statement}" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      } else if (lower.includes('imagekit')) {
+        block = `<img src="${statement}" alt="" class="w-full max-h-60 object-contain mx-auto mb-2 rounded shadow" data-enlargeable style="cursor: zoom-in;">`;
+      } else if (statement.startsWith('http')) {
+        const processed = processGlossary(statement, glossary);
+        block = `<p class="italic text-gray-800"><a href="${statement}" target="_blank">${processed}</a></p>`;
+      } else {
+        const processed = processGlossary(statement, glossary);
+        block = `<p class="italic text-gray-800">${processed}</p>`;
+      }
+
+      const card = document.createElement('div');
+      card.className = "statement-card border rounded shadow p-4 hover:shadow-lg transition break-words";
+      card.innerHTML = `
+        <div class="text-sm bg-yellow-100 inline-block px-2 py-1 rounded mb-2">
+          ${lang === 'hi' ? 'जाति:' : 'Caste:'} ${casteLabel} |
+          ${lang === 'hi' ? 'क्षेत्र:' : 'Geography:'} ${geoLabel} |
+          ${lang === 'hi' ? 'मौसम:' : 'Season:'} ${seasonLabel}
+        </div>
+        ${block}
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', applyGlossary);
+</script>
+
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Contact Us | Food Cultures{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/contact-us.css') }}">
+
+<div class="contact-form-wrapper flex justify-center">
+  <form name="submit-to-google-sheet" class="contact-form bg-[#fefaf5] p-6 rounded shadow max-w-lg w-full">
+
+    <h5 class="text-2xl font-bold text-[#9B613B] mb-2">We'd love to hear from you!</h5>
+    <p class="mb-4">Please give us your feedback about this portal or contact us with any questions below.</p>
+
+    <!-- Name -->
+    <div class="mb-3">
+      <label for="name" class="block font-medium">Name <span class="text-red-500">*</span></label>
+      <input id="name" name="name" type="text" class="w-full border rounded p-2" required>
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+      <label for="email" class="block font-medium">Email <span class="text-red-500">*</span></label>
+      <input id="email" name="email" type="email" class="w-full border rounded p-2" required>
+    </div>
+
+    <!-- Message -->
+    <div class="mb-3">
+      <label for="message" class="block font-medium">Message <span class="text-red-500">*</span></label>
+      <textarea id="message" name="message" rows="5" class="w-full border rounded p-2" required></textarea>
+    </div>
+
+    <!-- Phone -->
+    <div class="mb-3">
+      <label for="number" class="block font-medium">Phone (optional)</label>
+      <input id="number" name="number" type="text" placeholder="+919999999999" class="w-full border rounded p-2">
+    </div>
+
+    <!-- Status -->
+    <p id="status-message" class="text-sm mb-3"></p>
+
+    <!-- Submit -->
+    <button type="submit" class="bg-[#9B613B] text-white px-4 py-2 rounded hover:bg-[#835133]">Send</button>
+  </form>
+</div>
+
+<script>
+  const form_contact = document.forms['submit-to-google-sheet'];
+
+  form_contact.addEventListener('submit', e => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const statusMessage = document.getElementById("status-message");
+    statusMessage.textContent = "Sending email...";
+
+    fetch('{{ url_for("send_email") }}', {
+      method: 'POST',
+      body: JSON.stringify(Object.fromEntries(formData)),
+      headers: { "Content-Type": "application/json" }
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        statusMessage.textContent = "Email sent successfully!";
+        statusMessage.style.color = "green";
+        e.target.reset();
+      } else {
+        statusMessage.textContent = "Failed to send email. Try again.";
+        statusMessage.style.color = "red";
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      statusMessage.textContent = "Failed to send email. Try again.";
+      statusMessage.style.color = "red";
+    });
+  });
+</script>
+
+<!-- Optional extra JS file -->
+<script src="{{ url_for('static', filename='js/contact-us.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block title %}Groundnuts and Oilseeds | Food Cultures{% endblock %}
+
+{% block content %}
+<!-- Hero / Page Title -->
+<section class="bg-[#f6e1b5] px-6 py-4 rounded mb-6 flex justify-between items-center">
+  <h1 class="text-3xl font-semibold">Groundnuts and oilseeds</h1>
+
+  <div class="relative inline-block text-left">
+    <button onclick="toggleDropdown()" class="border px-4 py-2 rounded bg-[#f6e1b5]">
+      Other categories
+    </button>
+    <div id="dropdown" class="hidden absolute z-10 mt-2 w-56 bg-white border rounded shadow">
+      {% for cat in food_categories %}
+        <a href="/category/{{ cat.food_category_id }}" class="block px-4 py-2 hover:bg-gray-100">
+          {{ cat.food_category_name }}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Filters -->
+<section class="border p-4 mb-6">
+  <h2 class="text-xl mb-2">Information Cards</h2>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div>
+      <h3 class="font-bold">Caste:</h3>
+      {% for caste in castes %}
+        <label><input type="checkbox" name="caste" value="{{ caste.caste_id }}" onchange="filterData()">
+          {{ caste.caste_name }}</label><br>
+      {% endfor %}
+    </div>
+    <div>
+      <h3 class="font-bold">Seasons:</h3>
+      {% for season in seasons %}
+        <label><input type="checkbox" name="season" value="{{ season.season_id }}" onchange="filterData()">
+          {{ season.season_name }}</label><br>
+      {% endfor %}
+    </div>
+    <div>
+      <h3 class="font-bold">Geography:</h3>
+      {% for geo in geographies %}
+        <label><input type="checkbox" name="geography" value="{{ geo.geography_id }}" onchange="filterData()">
+          {{ geo.geography_name }}</label><br>
+      {% endfor %}
+    </div>
+    <div>
+      <h3 class="font-bold">Media Type:</h3>
+    </div>
+  </div>
+</section>
+
+<!-- Page Intro -->
+<section class="mb-8">
+  <p class="mb-4">
+    In the mixed cropped fields of western Avadh, a number of oilseeds were cultivated...
+  </p>
+</section>
+
+<!-- Cards -->
+<div id="cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {% for row in statements %}
+    <div class="border rounded shadow p-4">
+      <div class="text-sm mb-2">Caste: {{ row.caste_id }} | Geography: {{ row.geography_id }} | Season: {{ row.season_id}}</div>
+      {% if 'youtube' in row.statement %}
+        <iframe width="100%" height="200" src="{{ row.statement }}" frameborder="0" allowfullscreen></iframe>
+      {% elif row.statement.endswith('.jpg') or row.statement.endswith('.png') %}
+        <img src="{{ row.statement }}" alt="Image" class="w-full h-auto"/>
+      {% else %}
+        <p>{{ row.statement | highlight_glossary(Glossary) | safe }}</p>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
+
+<!-- Timeline -->
+<div class="mt-12">
+  <h2 class="text-2xl font-bold mb-4">Timeline</h2>
+  {% for t in timeline %}
+    <div class="mb-2">
+      <button onclick="toggleDescription({{ t.id }})" class="text-left w-full font-medium">
+        {{ t.label }} — {{ t.transition }}
+      </button>
+      <div id="desc-{{ t.id }}" class="hidden bg-gray-100 p-2 rounded">
+        {{ t.description }}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<script>
+  function toggleDropdown() {
+    document.getElementById('dropdown').classList.toggle('hidden');
+  }
+  function toggleDescription(id) {
+    const el = document.getElementById('desc-' + id);
+    el.classList.toggle('hidden');
+  }
+
+  function processGlossary(text, glossary) {
+    if (!glossary) return text;
+    glossary.sort((a, b) => b.term.length - a.term.length);
+    glossary.forEach(entry => {
+      const term = entry.term;
+      const def = entry.definition.replace(/"/g, '&quot;');
+      const regex = new RegExp(`\\b(${term})\\b`, 'gi');
+      text = text.replace(regex, `<span class="glossary-term" data-definition="${def}">$1</span>`);
+    });
+    return text;
+  }
+
+  async function filterData() {
+    const caste = [...document.querySelectorAll('input[name="caste"]:checked')].map(el => el.value);
+    const season = [...document.querySelectorAll('input[name="season"]:checked')].map(el => el.value);
+    const geography = [...document.querySelectorAll('input[name="geography"]:checked')].map(el => el.value);
+    const datatype = [...document.querySelectorAll('input[name="datatype"]:checked')].map(el => el.value);
+
+    const res = await fetch('/get_statements', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        food_category_id: 3,
+        caste_ids: caste,
+        season_ids: season,
+        geography_ids: geography,
+        datatype_ids: datatype
+      })
+    });
+
+    const result = await res.json();
+    const glossary = result.glossary;
+    const container = document.getElementById('cards');
+    container.innerHTML = '';
+
+    result.forEach(row => {
+      let statementBlock = '';
+      const lower = row.statement.toLowerCase();
+      if (lower.includes('youtube')) {
+        statementBlock = `<iframe width="100%" height="200" src="${row.statement}" frameborder="0" allowfullscreen></iframe>`;
+      } else if (lower.endsWith('.jpg') || lower.endsWith('.png')) {
+        statementBlock = `<img src="${row.statement}" alt="Image" class="w-full h-auto"/>`;
+      } else {
+        const processed = processGlossary(row.statement, glossary);
+        statementBlock = `<p>${processed}</p>`;
+      }
+
+      const card = `<div class="border p-4 rounded shadow">
+        <div class="mb-2 text-sm bg-[#f6e1b5] inline-block px-2 py-1 rounded">
+          Caste: ${row.caste_id} | Geography: ${row.geography_id} | Season: ${row.season_id}
+        </div>
+        ${statementBlock}
+      </div>`;
+      container.innerHTML += card;
+    });
+  }
+</script>
+
+<style>
+  .glossary-term {
+    font-weight: bold;
+    position: relative;
+    cursor: help;
+  }
+  .glossary-term::after {
+    content: attr(data-definition);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fef3c7;
+    color: #333;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: pre-wrap;
+    font-size: 0.8rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+    width: max-content;
+    max-width: 200px;
+    z-index: 50;
+  }
+  .glossary-term:hover::after {
+    opacity: 1;
+  }
+</style>
+
+{% endblock %}
