@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}About Us | Food Cultures{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto px-6 py-10 bg-[#fefaf5] rounded">
+    <h2 class="text-3xl font-bold text-center text-[#9B613B] mb-6 border-b pb-2">About us</h2>
+
+    <h3 class="text-2xl font-bold text-[#9B613B] mt-10 mb-2">How it started…</h3>
+    <p class="mb-4">A research talk about food and farming transitions in western Avadh, Uttar Pradesh, India, presented at IIIT Bangalore in January 2019, triggered the conversations that led to the creation of this portal. The talk described the findings of a two-year, collaborative and multidisciplinary study (2017-18) conducted by Sangtin, a farmer-labourer collective in Sitapur district, Uttar Pradesh, and the Indian Institute of Technology Delhi, entitled, 'Linkages between food, farming and nutrition in the region of western Avadh, Uttar Pradesh.' This study documented historical and current diets, dietary and agricultural transitions and their drivers in the region, and people’s experiences of hunger and health. While discovering a rich tableau of historical recipes and cultural practices around food and health, the work underscored the importance of identity in shaping people’s experiences of hunger and health and in influencing their trajectories from historical to current diets. The talk and the rich discussion that followed got us thinking about how to take this research to a broader audience and make it more inclusive. Our location at an IT institute further prompted us to think about how to use digital technologies to expand our data collection, juxtapose it against other sources discussing the history of agrarian and dietary change in India and broaden the reach of our data and analysis beyond academia. DesignBeku, a digital design group, was brought on board to organise and visualise the research data and design and develop the online content.</p>
+
+    <p class="mb-4">The ‘Recovering Food Narratives’ portal is the result of these collaborations. We hope that the narratives and histories we present here in text, image and video form can be used by residents of the region, and by students, researchers and policy makers elsewhere, to build a fuller understanding of the historical trajectory of a food production and consumption ecosystem. In addition to the content of the repository, we would also be thrilled if others with similar interests would like to use the codebase for this portal to design similar repositories for other regions of the country. Write to us if you’d like to use the codebase, which is available under a CreativeCommons license.</p>
+
+<!-- YOUTUBE SECTION - Zigzag layout -->
+<div class="my-10 space-y-10">
+    <!-- Video 1: video left, text right -->
+    <div class="flex flex-col lg:flex-row items-center gap-6">
+        <div class="flex-shrink-0">
+            <iframe width="350" height="200" src="https://www.youtube.com/embed/HacMACsYlmQ?si=c6TOuBOJXpzDj0cb"
+                frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="text-[#9B613B] text-base font-medium lg:w-1/2">
+            Richa Kumar: Brief Overview of Dietary Changes in relation to Agricultural Changes in the western Avadh Region
+        </div>
+    </div>
+
+    <!-- Video 2: video right, text left -->
+    <div class="flex flex-col-reverse lg:flex-row items-center gap-6">
+        <div class="text-[#9B613B] text-base font-medium lg:w-1/2">
+            Janaki Srinivasan: Digital Repositories: Agriculture, Nutrition, Power and Politics
+        </div>
+        <div class="flex-shrink-0">
+            <iframe width="350" height="200" src="https://www.youtube.com/embed/N5Vwd5HsZIg?si=x4i1nvfqoKB5IQWI"
+                frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Video 3: video left, text right -->
+    <div class="flex flex-col lg:flex-row items-center gap-6">
+        <div class="flex-shrink-0">
+            <iframe width="350" height="200" src="https://www.youtube.com/embed/L-FUSx5sq8M?si=5-jTmt502VgBQaQX"
+                frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div class="text-[#9B613B] text-base font-medium lg:w-1/2">
+            Sudha Nagavarapu: On The Recovering Food Narratives Portal
+        </div>
+    </div>
+</div>
+
+    <h3 class="text-2xl font-bold text-[#9B613B] mt-10 mb-2">Partners</h3>
+    <p class="mb-4"><b>Sangtin</b> is a collective working with female and male farmer-labourers in Sitapur and Hardoi districts of Uttar Pradesh, India. These are families, mainly Dalit, who are landless or have marginal landholdings - they lease land or sharecrop and supplement farm income with daily wage work. This region, also known as western Avadh, has some of the worst nutritional indicators in the country, with stunting rates among children at 47.8% and anaemia among all women aged 15-49 years at 55.8% in Sitapur district as per NFHS-5 data. Anaemia is on the rise, as are non-communicable diseases (NCDs) such as diabetes. Moreover, anecdotes from people in their 40s and older described a huge drop in dietary diversity in the past 30-40 years, along with a drop in the consumption of nutritious foods like dairy products, fish and wild fruits. At the same time, these farmer-labourers expressed satisfaction at not going hungry and now being able to consume wheat regularly. An initiative to revive the production and consumption of millets was faltering. We felt that we had an incomplete understanding of food and farming transitions and their implications across social hierarchies. A chance meeting between Sudha N. (Sangtin) and Richa Kumar (IIT-Delhi) kicked off a brainstorming session and led to this multidisciplinary and collaborative research project.</p>
+
+    <p class="mb-4">The <b>Department of Humanities and Social Sciences at IIT-Delhi</b> consists of several disciplines with faculty in Economics, Literature, Linguistics, Philosophy, Psychology and Sociology. It offers a wide range of courses to the undergraduate engineering students, runs two MA programs (in Cognitive Science and Economics) and a vibrant PhD program that encourages disciplinary and interdisciplinary research. The Department’s vision is to develop an academic entity that is seen as being on the vanguard of research and training in the Humanities and Social Sciences, and one that helps make better critical thinkers of India's brightest young minds. Along with contributing to the transformation of IIT Delhi into a 21st-century science and engineering education institution, the Department’s vision also includes working with partners within and outside IITD to address India's developmental challenges. This portal is a small contribution towards that shared vision. By bringing attention to the interlinkages between agrarian transformation and dietary change, and the resulting crisis of nutrition that we find ourselves in, we hope to rekindle important conversations about food and health in the scholarly, the policy and the popular mediascapes.</p>
+
+    <p class="mb-4">The <b>Centre for Information Technology and Public Policy (CITAPP)</b> at IIIT-Bangalore: CITAPP is an interdisciplinary research and advocacy centre that seeks to nurture and transform public policy around the use of digital Information and Communication Technologies in engagement with diverse publics, including varied producers, consumers and regulators of these technologies. Digital technologies have been celebrated for their potential to democratise both the doing and consumption of historical research. By facilitating the collection and archiving of oral histories from diverse constituents, they can aid in the “the inclusion of all histories”: this is what the Recovering Food Narratives portal attempts through its rich digital repository that juxtaposes diverse narratives of diets, including from research articles, colonial gazetteers and oral histories. We hope that the audience for this repository will be as varied as these narratives, histories and diets,  and include  residents of the western Avadh region, as well as students, researchers and policy makers  elsewhere.</p>
+
+    <p><b>Design Beku</b>, which was started in 2018, strives to make design and technology more locally rooted, contextually relevant and ethically proactive. They endeavour to provide affordable services for not-for-profit and grassroots organisations to ensure they have a digital presence that can support them in their ongoing activities in service of their mission. As a collective, Design Beku has led efforts to support Covid-19 relief efforts by designing and disbursing information, education materials, and relief through the Oxygenblr platform.</p>
+</div>
+{% endblock %}
